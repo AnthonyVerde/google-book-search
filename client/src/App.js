@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Nav from "./components/Nav";
-import Logo from "./components/Logo";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Search from "./pages/Search";
@@ -14,7 +13,6 @@ class App extends Component {
     return (
       <div>
         <Nav />
-        <Logo />
         <Router>
           <Switch>
             <Route exact path="/" component={Search} />

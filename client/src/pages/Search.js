@@ -58,14 +58,13 @@ class Search extends Component {
         <div className="container cardBox">
           <div className="row">
             <div className="container mainBox">
-              <i className="fas fa-book" id="bookIcon"></i>
               <Card heading="Results">
                 {this.state.result.map(book => (
                   <BookDetail
                     key={book.id}
                     src={book.volumeInfo.imageLinks
                       ? book.volumeInfo.imageLinks.thumbnail
-                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Book_stub_img.svg/450px-Book_stub_img.svg.png"}
+                      : "https://visualpharm.com/assets/327/Book-595b40b75ba036ed117d566a.svg"}
                     title={book.volumeInfo.title}
                     authors={book.volumeInfo.authors
                       ? book.volumeInfo.authors.join(", ")
@@ -77,7 +76,7 @@ class Search extends Component {
                       title: book.volumeInfo.title,
                       src: book.volumeInfo.imageLinks
                         ? book.volumeInfo.imageLinks.thumbnail
-                        : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Book_stub_img.svg/450px-Book_stub_img.svg.png",
+                        : "https://visualpharm.com/assets/327/Book-595b40b75ba036ed117d566a.svg",
                       authors: book.volumeInfo.authors,
                       date: book.volumeInfo.publishedDate,
                       description: book.volumeInfo.description,

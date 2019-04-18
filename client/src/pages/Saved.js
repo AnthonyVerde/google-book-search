@@ -40,21 +40,19 @@ class SavedBooks extends Component {
 
   render() {
     return (
-      <div className="container cardBox">
+      <div className="container">
         <div className="row">
-          <div className="container mainBox2"
+          <div className="container"
             style={{
-              borderRadius: "20px",
-              marginBottom: "20px",
-              background: "rgb(36, 150, 216)"
-            }}> <i className="fas fa-book" id="bookIcon"></i>
-            <Card heading="Saved Books">
+              margin: "20px"
+            }}>
+            <Card heading="Your Saved Books">
               {this.state.books.map(book => (
                 <SavedBookDetail
                   key={book._id}
                   src={book
                     ? book.src
-                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Book_stub_img.svg/450px-Book_stub_img.svg.png"}
+                    : "https://visualpharm.com/assets/327/Book-595b40b75ba036ed117d566a.svg"}
                   title={book.title}
                   authors={book.authors.join(", ")}
                   date={book.date}

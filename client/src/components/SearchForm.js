@@ -8,7 +8,6 @@ function SearchForm(props) {
                 <div className="col-md-12 searchBox">
                     <form>
                         <div className="form-group formTitle">
-                            <label htmlFor="search">Search:</label>
                             <input
                                 onChange={props.handleInputChange}
                                 value={props.value}

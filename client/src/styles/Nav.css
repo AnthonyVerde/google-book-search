@@ -1,0 +1,27 @@
+.navBar {
+    margin: auto;
+    background-color: lightgray;
+    text-align: center;
+}
+
+.navbar-brand1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: rgb(54, 54, 54);
+}
+
+.navbar-brand2 {
+    font-size: 1.2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: rgb(54, 54, 54);
+}
+
+.navbar-brand3 {
+    font-size: 1.2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: rgb(54, 54, 54);
+}
