@@ -1,3 +1,13 @@
 .searchBox {
     margin-top: 20px;
 }
+
+.searchInput {
+    float: left;
+    max-width: 500px;
+}
+
+.search-btn {
+    display: inline;
+    margin-left: 20px;
+}

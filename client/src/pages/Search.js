@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import "../styles/Search.css";
 import SearchForm from "../components/SearchForm";
-// import Books from "../components/Books";
 import API from "../utils/API";
 import Card from "../components/Card";
 import BookDetail from "../components/BookDetail";
@@ -12,7 +10,6 @@ class Search extends Component {
     search: ""
   };
 
-
   componentDidMount() {
     this.searchBooks("Green Eggs and Ham");
   }
@@ -21,7 +18,6 @@ class Search extends Component {
     API.search(query)
       .then(res => this.setState({ result: res.data.items }))
       .catch(err => console.log(err));
-
   };
 
   handleSaveBook = bookData => {
@@ -39,8 +35,7 @@ class Search extends Component {
     });
   };
 
-
-  // When the form is submitted, search the google API for the value of `this.state.search`
+  // Search Google API upon form submit
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchBooks(this.state.search);

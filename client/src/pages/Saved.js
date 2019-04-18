@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../styles/Saved.css";
 import API from "../utils/API";
 import Card from "../components/Card";
 import SavedBookDetail from "../components/SavedBookDetail";

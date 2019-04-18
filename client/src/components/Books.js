@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/Books.css";
 
 function Books(props) {
     return (

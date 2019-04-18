@@ -8,6 +8,7 @@ function SearchForm(props) {
                 <div className="col-md-12 searchBox">
                     <form>
                         <div className="form-group formTitle">
+                        <div className="searchInput">
                             <input
                                 onChange={props.handleInputChange}
                                 value={props.value}
@@ -17,7 +18,7 @@ function SearchForm(props) {
                                 placeholder="Search For a Book"
                                 id="search"
                             />
-                            <br/>
+                            </div>
                             <button onClick={props.handleFormSubmit} className="btn btn-primary search-btn">
                                 Search
                             </button>
