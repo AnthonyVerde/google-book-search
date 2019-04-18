@@ -1,72 +1,97 @@
 import React, { Component } from "react";
-import API from "../utils/API";
-import Container from "../components/Container";
+import "../styles/Search.css";
 import SearchForm from "../components/SearchForm";
-import SearchResults from "../components/SearchResults";
-import Alert from "../components/Alert";
+// import Books from "../components/Books";
+import API from "../utils/API";
+import Card from "../components/Card";
+import BookDetail from "../components/BookDetail";
 
 class Search extends Component {
   state = {
-    search: "",
-    books: [],
-    results: [],
-    error: ""
+    result: [],
+    search: ""
   };
 
-  search(){
-    const URL = "https://www.googleapis.com/books/v1/volume?q=";
-    fetch(`${URL}${this.state.search}`, {method: 'GET'})
-    .then(json => {
-      let {results} = json;
-      this.setState({results});
-      console.log(json);
-    });
+
+  componentDidMount() {
+    this.searchBooks("Green Eggs and Ham");
   }
 
-  // When the component mounts, get a list of all available base breeds and update this.state.breeds
-  componentDidMount() {
-    API.getBaseBreedsList()
-      .then(res => this.setState({ books: res.data.message }))
+  searchBooks = query => {
+    API.search(query)
+      .then(res => this.setState({ result: res.data.items }))
+      .catch(err => console.log(err));
+
+  };
+
+  handleSaveBook = bookData => {
+    // console.log("testing button");
+    API.saveBook(bookData)
+      .then(res => alert("Book saved!"))
       .catch(err => console.log(err));
   }
 
   handleInputChange = event => {
-    this.setState({ search: event.target.value });
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
   };
 
+
+  // When the form is submitted, search the google API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    API.getBooks(this.state.search)
-      .then(res => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        this.setState({ results: res.data.message, error: "" });
-      })
-      .catch(err => this.setState({ error: err.message }));
+    this.searchBooks(this.state.search);
   };
 
   render() {
+
     return (
       <div>
-        <Container style={{ minHeight: "80%" }}>
-          <h1 className="text-center">Search Book</h1>
-          <Alert
-            type="danger"
-            style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
-          >
-            {this.state.error}
-          </Alert>
-          <SearchForm
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}
-            books={this.state.books}
-          />
-          <SearchResults results={this.state.results} />
-        </Container>
-      </div>
+        <SearchForm
+          value={this.state.search}
+          handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
+        />
+        <div className="container cardBox">
+          <div className="row">
+            <div className="container mainBox">
+              <i className="fas fa-book" id="bookIcon"></i>
+              <Card heading="Results">
+                {this.state.result.map(book => (
+                  <BookDetail
+                    key={book.id}
+                    src={book.volumeInfo.imageLinks
+                      ? book.volumeInfo.imageLinks.thumbnail
+                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Book_stub_img.svg/450px-Book_stub_img.svg.png"}
+                    title={book.volumeInfo.title}
+                    authors={book.volumeInfo.authors
+                      ? book.volumeInfo.authors.join(", ")
+                      : "N/A"}
+                    date={book.volumeInfo.publishedDate}
+                    description={book.volumeInfo.description}
+                    link={book.volumeInfo.infoLink}
+                    handleSaveBook={() => this.handleSaveBook({
+                      title: book.volumeInfo.title,
+                      src: book.volumeInfo.imageLinks
+                        ? book.volumeInfo.imageLinks.thumbnail
+                        : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Book_stub_img.svg/450px-Book_stub_img.svg.png",
+                      authors: book.volumeInfo.authors,
+                      date: book.volumeInfo.publishedDate,
+                      description: book.volumeInfo.description,
+                      link: book.volumeInfo.infoLink
+                    })}
+                  />
+                ))}
+              </Card>
+
+            </div>
+          </div>
+        </div>
+      </div >
     );
   }
 }
-
 export default Search;
